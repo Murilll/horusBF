@@ -1,7 +1,6 @@
 import { TextField, Box } from '@mui/material/';
 import { Select } from '@mui/base/Select';
 import { Option } from '@mui/base/Option';
-import AutoComplete from '@/components/Common/AutoComplete/AutoComplete';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 
@@ -27,7 +26,7 @@ export default function RegisterCar() {
                     flexDirection: 'column'
                 }}
             >
-                <AutoComplete />
+                
                 <TextField style={{ width: '35rem' }} label="EDV" />
                 <TextField style={{ width: '35rem' }} label="Nome do colaborador" />
                 <TextField style={{ width: '35rem' }} label="Carro" />
