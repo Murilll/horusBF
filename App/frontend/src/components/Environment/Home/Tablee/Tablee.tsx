@@ -10,6 +10,8 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
 
+import "./Style.scss";
+
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
 
@@ -59,15 +61,15 @@ export default function BasicTable() {
     var hour = dateIn[1]
 
     rows.push(createData(
-        colcar[index].collaborator.edv,
-        colcar[index].collaborator.name,
-        colcar[index].car.name,
-        colcar[index].car.color,
-        colcar[index].car.licensePlate,
-        dateIn[0] + ", " + hour,
-        colcar[index].out,
-        colcar[index].status
-      )
+      colcar[index].collaborator.edv,
+      colcar[index].collaborator.name,
+      colcar[index].car.name,
+      colcar[index].car.color,
+      colcar[index].car.licensePlate,
+      dateIn[0] + ", " + hour,
+      colcar[index].out,
+      colcar[index].status
+    )
     )
   }
 
@@ -102,11 +104,15 @@ export default function BasicTable() {
               <TableCell align="right">{row.licensePlate}</TableCell>
               <TableCell align="right">{row.In}</TableCell>
               <TableCell align="right">{row.out}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">
+                <div className={row.status == "Saiu" ? "Ctn_Status_Exit" : "Ctn_Status_In"}>
+                  {row.status}
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer >
   );
 }
