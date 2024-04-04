@@ -11,7 +11,7 @@ import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
 
 export default function BasicTable() {
-  const [colcar, setColCar] = useState([]);
+  const [colcar, setColCar] = useState<any[]>([]);
 
   function createData(
     edv: string,
