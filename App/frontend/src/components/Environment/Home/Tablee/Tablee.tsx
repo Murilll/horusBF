@@ -16,6 +16,7 @@ export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
 
   function createData(
+    id: string,
     edv: string,
     name: string,
     car: string,
@@ -25,7 +26,7 @@ export default function BasicTable() {
     out: string,
     status: string
   ) {
-    return { edv, name, car, color, licensePlate, In, out, status };
+    return { id, edv, name, car, color, licensePlate, In, out, status };
   }
 
   const rows = [
@@ -36,6 +37,7 @@ export default function BasicTable() {
     try {
       const response = await axios.get('http://localhost:5293/api/InAndOut');
       setColCar(response.data)
+
     }
     catch (error) {
       console.log(error);
@@ -55,12 +57,23 @@ export default function BasicTable() {
   }, []);
 
   for (let index = 0; index < colcar.length; index++) {
+
+    if (colcar[index].car == null) {
+      colcar[index].car = {
+        name: "eita",
+        color: "eita",
+      }
+      colcar[index].status = "Carro não cadastrado"
+
+    }
+
     var dateIn = colcar[index].in;
     dateIn = dateIn.split('T');
 
     var hour = dateIn[1]
 
     rows.push(createData(
+      colcar[index].id,
       colcar[index].collaborator.edv,
       colcar[index].collaborator.name,
       colcar[index].car.name,
@@ -80,31 +93,31 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>EDV</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Car</TableCell>
-            <TableCell align="right">Color</TableCell>
-            <TableCell align="right">License Plate</TableCell>
-            <TableCell align="right">In</TableCell>
-            <TableCell align="right">Out</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Car</TableCell>
+            <TableCell align="left">Color</TableCell>
+            <TableCell align="left">License Plate</TableCell>
+            <TableCell align="left">In</TableCell>
+            <TableCell align="left">Out</TableCell>
+            <TableCell align="center">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.edv}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.edv}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.car}</TableCell>
-              <TableCell align="right">{row.color}</TableCell>
-              <TableCell align="right">{row.licensePlate}</TableCell>
-              <TableCell align="right">{row.In}</TableCell>
-              <TableCell align="right">{row.out}</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{row.name}</TableCell>
+              <TableCell align="left">{row.car}</TableCell>
+              <TableCell align="left">{row.color}</TableCell>
+              <TableCell align="left">{row.licensePlate}</TableCell>
+              <TableCell align="left">{row.In}</TableCell>
+              <TableCell align="left">{row.out}</TableCell>
+              <TableCell align="center">
                 <div className={row.status == "Saiu" ? "Ctn_Status_Exit" : "Ctn_Status_In"}>
                   {row.status}
                 </div>

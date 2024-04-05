@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.Common;
 using CarStoreApi.Services;
 using CarStoreApi.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InAndOutApi.Controllers;
 
@@ -48,29 +49,48 @@ public class InAndOutController : ControllerBase
         Car car = new Car();
         Collaborator collaborator = new Collaborator();
 
+        InAndOut newInAndOut = new InAndOut();
+
         try
         {
             car = await _carsService.GetAsyncWithLicensePlate(DTO.LicensePlate);
-            
+        }
+        catch (System.Exception)
+        {
             if (car == null)
             {
-                System.Console.WriteLine("não existe esse carro");
+                car.Name = "";
+                car.Color = "";
+                car.CollaboratorId = "";
+                car.LicensePlate = DTO.LicensePlate;
+                newInAndOut.In = DateTime.Now;
+                newInAndOut.Out = DateTime.MinValue;
+                newInAndOut.Status = "Carro não cadastrado";
             }
+        }
 
-            System.Console.WriteLine("car não existe");
-
+        try
+        {
             collaborator = await _collaboratorsService.GetAsync(car.CollaboratorId);
-
-            System.Console.WriteLine("collabo não existe");
-
         }
         catch (System.Exception)
         {
 
-            throw;
-        }
+            if (collaborator == null)
+            {
+                car.Name = "a";
+                car.Color = "a";
+                car.CollaboratorId = "a";
+                car.LicensePlate = DTO.LicensePlate;
+                collaborator.EDV = "a";
+                collaborator.Name = "a";
+                newInAndOut.In = DateTime.Now;
+                newInAndOut.Out = DateTime.MinValue;
+                newInAndOut.Status = "Carro não cadastrado";
 
-        InAndOut newInAndOut = new InAndOut();
+                await _inandoutService.CreateAsync(newInAndOut);
+            }
+        }
 
         newInAndOut.Collaborator = collaborator;
         newInAndOut.Car = car;
