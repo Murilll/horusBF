@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useCallback, useEffect, useState } from 'react';
+import { Typography } from '@mui/material';
 import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
 
@@ -64,7 +65,10 @@ export default function BasicTable() {
         color: "eita",
       }
       colcar[index].status = "Carro não cadastrado"
+    }
 
+    if (colcar[index].out == "0001-01-01T00:00:00Z") {
+      colcar[index].out = "..."
     }
 
     var dateIn = colcar[index].in;
@@ -90,16 +94,36 @@ export default function BasicTable() {
     <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
       <Brand />
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
+        <TableHead sx={{
+          backgroundColor: "white",
+
+          fontSize: 96
+        }}>
           <TableRow>
-            <TableCell>EDV</TableCell>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Car</TableCell>
-            <TableCell align="left">Color</TableCell>
-            <TableCell align="left">License Plate</TableCell>
-            <TableCell align="left">In</TableCell>
-            <TableCell align="left">Out</TableCell>
-            <TableCell align="center">Status</TableCell>
+            <TableCell>
+              <Typography variant="h6">EDV</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">Name</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">Car</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">Color</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">License Plate</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">In</Typography>
+            </TableCell>
+            <TableCell align="left">
+              <Typography variant="h6">Out</Typography>
+            </TableCell>
+            <TableCell align="center">
+              <Typography variant="h6">Status</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
