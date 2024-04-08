@@ -61,8 +61,8 @@ export default function BasicTable() {
 
     if (colcar[index].car == null) {
       colcar[index].car = {
-        name: "eita",
-        color: "eita",
+        name: "...",
+        color: "...",
       }
       colcar[index].status = colcar[index].status;
       colcar[index].car.licensePlate = colcar[index].licensePlateUnknown;
