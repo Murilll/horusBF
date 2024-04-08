@@ -51,22 +51,15 @@ public class InAndOutController : ControllerBase
 
         InAndOut newInAndOut = new InAndOut();
 
+        System.Console.WriteLine(DTO.LicensePlate);
+
         try
         {
             car = await _carsService.GetAsyncWithLicensePlate(DTO.LicensePlate);
         }
         catch (System.Exception)
         {
-            if (car == null)
-            {
-                car.Name = "";
-                car.Color = "";
-                car.CollaboratorId = "";
-                car.LicensePlate = DTO.LicensePlate;
-                newInAndOut.In = DateTime.Now;
-                newInAndOut.Out = DateTime.MinValue;
-                newInAndOut.Status = "Carro não cadastrado";
-            }
+
         }
 
         try
@@ -76,20 +69,6 @@ public class InAndOutController : ControllerBase
         catch (System.Exception)
         {
 
-            if (collaborator == null)
-            {
-                car.Name = "a";
-                car.Color = "a";
-                car.CollaboratorId = "a";
-                car.LicensePlate = DTO.LicensePlate;
-                collaborator.EDV = "a";
-                collaborator.Name = "a";
-                newInAndOut.In = DateTime.Now;
-                newInAndOut.Out = DateTime.MinValue;
-                newInAndOut.Status = "Carro não cadastrado";
-
-                await _inandoutService.CreateAsync(newInAndOut);
-            }
         }
 
         newInAndOut.Collaborator = collaborator;
@@ -97,8 +76,19 @@ public class InAndOutController : ControllerBase
 
         if (DTO.In)
         {
+            var unknown = DTO.LicensePlate;
+
             newInAndOut.In = DateTime.Now;
             newInAndOut.Status = "Entrou";
+            newInAndOut.LicensePlateUnknown = "null";
+            
+            if (collaborator.Id == null)
+            {
+                newInAndOut.LicensePlateUnknown = unknown;
+                newInAndOut.Status = "Tentou entrar leo";
+            }
+            System.Console.WriteLine(newInAndOut.LicensePlateUnknown);
+
             await _inandoutService.CreateAsync(newInAndOut);
 
         }

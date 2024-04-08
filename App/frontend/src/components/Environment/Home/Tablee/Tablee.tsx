@@ -64,7 +64,8 @@ export default function BasicTable() {
         name: "eita",
         color: "eita",
       }
-      colcar[index].status = "Carro não cadastrado"
+      colcar[index].status = colcar[index].status;
+      colcar[index].car.licensePlate = colcar[index].licensePlateUnknown;
     }
 
     if (colcar[index].out == "0001-01-01T00:00:00Z") {

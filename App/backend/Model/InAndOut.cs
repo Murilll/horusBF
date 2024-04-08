@@ -11,13 +11,15 @@ public class InAndOut
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
 
-    public Collaborator Collaborator { get; set; } = null!;
+    public Collaborator Collaborator { get; set; }
 
-    public Car Car { get; set; } = null!;
+    public Car Car { get; set; }
 
     public DateTime In { get; set; }
     
     public DateTime Out { get; set; }
 
     public string Status { get; set; }
+
+    public string LicensePlateUnknown { get; set; }
 }

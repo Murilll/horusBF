@@ -15,5 +15,5 @@ public class Car
 
     public string LicensePlate { get; set; } = null!;
 
-    public string CollaboratorId { get; set; } = null!;
+    public string CollaboratorId { get; set; }
 }
