@@ -64,6 +64,10 @@ export default function BasicTable() {
         name: "...",
         color: "...",
       }
+      colcar[index].collaborator = {
+        edv: "...",
+        name: "...",
+      }
       colcar[index].status = colcar[index].status;
       colcar[index].car.licensePlate = colcar[index].licensePlateUnknown;
     }
@@ -93,7 +97,6 @@ export default function BasicTable() {
 
   return (
     <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
-      <Brand />
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{
           backgroundColor: "white",
@@ -143,9 +146,27 @@ export default function BasicTable() {
               <TableCell align="left">{row.In}</TableCell>
               <TableCell align="left">{row.out}</TableCell>
               <TableCell align="center">
-                <div className={row.status == "Saiu" ? "Ctn_Status_Exit" : "Ctn_Status_In"}>
-                  {row.status}
-                </div>
+                {row.status == "Saiu" ? (
+                  <div className="Ctn_Status">
+                    <div className="Ctn_Status_Exit">
+                      {row.status}
+                    </div>
+                  </div>
+                ) : (
+                  row.status == "Entrou" ? (
+                    <div className="Ctn_Status">
+                      <div className="Ctn_Status_In">
+                        {row.status}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="Ctn_Status">
+                      <div className="Ctn_Status_Unknow">
+                        {row.status}
+                      </div>
+                    </div>
+                  )
+                )}
               </TableCell>
             </TableRow>
           ))}

@@ -85,7 +85,7 @@ public class InAndOutController : ControllerBase
             if (collaborator.Id == null)
             {
                 newInAndOut.LicensePlateUnknown = unknown;
-                newInAndOut.Status = "Tentou entrar leo";
+                newInAndOut.Status = "Carro não cadastrado";
             }
             System.Console.WriteLine(newInAndOut.LicensePlateUnknown);
 

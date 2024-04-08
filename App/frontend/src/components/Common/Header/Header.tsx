@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import Button from "@mui/material/Button";
 import Brand from "../Brand/Brand";
+import Logo from "../Logo/Logo";
 import "./Style.scss";
 
 export default function Header() {
@@ -12,9 +13,8 @@ export default function Header() {
             <div className="Container_All">
                 <Brand />
                 <div className="Container_Header">
-                    <Typography variant="h4" >
-                        BOSCH
-                    </Typography>
+                    <Logo />
+                
                     <div className="Container_Button">
                         <Button type="button" onClick={() => router.push('/home')}>
                             Home
