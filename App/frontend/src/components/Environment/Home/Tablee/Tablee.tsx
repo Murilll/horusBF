@@ -72,7 +72,7 @@ export default function BasicTable() {
       colcar[index].car.licensePlate = colcar[index].licensePlateUnknown;
     }
 
-    if (colcar[index].out == "0001-01-01T00:00:00Z") {
+    if (colcar[index].out <= "0001-01-01T00:00:00Z") {
       colcar[index].out = "..."
     }
 

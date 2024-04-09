@@ -83,7 +83,8 @@ public class InAndOutController : ControllerBase
         {
             var unknown = DTO.LicensePlate;
 
-            newInAndOut.In = DateTime.Now;
+            newInAndOut.In = DateTimeOffset.Now;
+            System.Console.WriteLine(newInAndOut.In);
             newInAndOut.Status = "Entrou";
             newInAndOut.LicensePlateUnknown = "null";
             
@@ -92,7 +93,6 @@ public class InAndOutController : ControllerBase
                 newInAndOut.LicensePlateUnknown = unknown;
                 newInAndOut.Status = "Carro não cadastrado";
             }
-            System.Console.WriteLine(newInAndOut.LicensePlateUnknown);
 
             await _inandoutService.CreateAsync(newInAndOut);
 
