@@ -40,7 +40,7 @@ public class CollaboratorsController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = newCollaborator.Id }, newCollaborator);
     }
 
-    [HttpPut("{id:length(24)}")]
+    [HttpPatch("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, Collaborator updatedCollaborator)
     {
         var collaborator = await _collaboratorsService.GetAsync(id);

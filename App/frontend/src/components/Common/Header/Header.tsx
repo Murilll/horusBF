@@ -22,9 +22,9 @@ export default function Header() {
                         <Button type="button" onClick={() => router.push('/registerCollaborator')}>
                             Registrar Colaborador
                         </Button>
-                        {/* <Button type="button" onClick={() => router.push('/registerCar')}>
-                            Registrar Carro
-                        </Button> */}
+                        <Button type="button" onClick={() => router.push('/dashboards')}>
+                            Dashboard
+                        </Button>
                     </div>
                 </div>
             </div>

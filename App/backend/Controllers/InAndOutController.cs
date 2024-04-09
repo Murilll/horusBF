@@ -24,7 +24,12 @@ public class InAndOutController : ControllerBase
 
     [HttpGet]
     public async Task<List<InAndOut>> Get()
-        => await _inandoutService.GetAsync();
+    {
+        var list = await _inandoutService.GetAsync();
+        list.Reverse();
+
+        return list;
+    }
 
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<InAndOut>> Get(string id)
