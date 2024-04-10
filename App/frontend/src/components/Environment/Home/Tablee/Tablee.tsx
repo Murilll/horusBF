@@ -24,7 +24,7 @@ export default function BasicTable() {
     color: string,
     licensePlate: string,
     In: string,
-    out: Date,
+    out: string,
     status: string
   ) {
     return { id, edv, name, car, color, licensePlate, In, out, status };
@@ -153,6 +153,9 @@ export default function BasicTable() {
                     <div className="Ctn_Status_Exit">
                       {row.status}
                     </div>
+                    <div className="Ctn_Status_Exit_Circle">
+                      .
+                    </div>
                   </div>
                 ) : (
                   row.status == "Entrou" ? (
@@ -160,11 +163,17 @@ export default function BasicTable() {
                       <div className="Ctn_Status_In">
                         {row.status}
                       </div>
+                      <div className="Ctn_Status_In_Circle">
+                        .
+                      </div>
                     </div>
                   ) : (
                     <div className="Ctn_Status">
                       <div className="Ctn_Status_Unknow">
                         {row.status}
+                      </div>
+                      <div className="Ctn_Status_Unknow_Circle">
+                        .
                       </div>
                     </div>
                   )
