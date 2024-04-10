@@ -17,7 +17,7 @@ public class InAndOut
 
     public DateTimeOffset In { get; set; }
     
-    public DateTime Out { get; set; }
+    public DateTimeOffset Out { get; set; }
 
     public string Status { get; set; }
 

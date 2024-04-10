@@ -103,7 +103,9 @@ public class InAndOutController : ControllerBase
             var LastCar = await _carsService.GetAsyncWithLicensePlate(DTO.LicensePlate);
             var LastInAndOut = await _inandoutService.GetAsyncByCar(LastCar);
 
-            LastInAndOut.Out = DateTime.Now;
+            System.Console.WriteLine("aqui" + LastInAndOut.Out.Year);
+
+            LastInAndOut.Out = DateTimeOffset.Now;
             LastInAndOut.Status = "Saiu";
 
             await _inandoutService.UpdateAsync(LastInAndOut.Id, LastInAndOut);

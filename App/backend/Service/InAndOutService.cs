@@ -47,13 +47,16 @@ public class InAndOutService
         await _inandoutCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public async Task<InAndOut?> GetAsyncByCar(Car car) =>
-        await _inandoutCollection.Find(x => x.Car == car && x.Out.Year < 10).FirstOrDefaultAsync();
+        await _inandoutCollection.Find(x => x.Car == car && x.Out == DateTimeOffset.MinValue).FirstOrDefaultAsync();
 
     public async Task CreateAsync(InAndOut newBook) =>
         await _inandoutCollection.InsertOneAsync(newBook);
 
     public async Task UpdateAsync(string id, InAndOut updatedBook) =>
         await _inandoutCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+
+    // public async Task UpdateDateAsync(string id, InAndOut updatedBook) => TODO
+    //     await _inandoutCollection.FindOneAndUpdate(updatedBook)
 
     public async Task RemoveAsync(string id) =>
         await _inandoutCollection.DeleteOneAsync(x => x.Id == id);
