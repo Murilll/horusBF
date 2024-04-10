@@ -24,7 +24,7 @@ export default function BasicTable() {
     color: string,
     licensePlate: string,
     In: string,
-    out: string,
+    out: Date,
     status: string
   ) {
     return { id, edv, name, car, color, licensePlate, In, out, status };
@@ -38,7 +38,6 @@ export default function BasicTable() {
     try {
       const response = await axios.get('http://localhost:5293/api/InAndOut');
       setColCar(response.data)
-
     }
     catch (error) {
       console.log(error);
@@ -72,14 +71,17 @@ export default function BasicTable() {
       colcar[index].car.licensePlate = colcar[index].licensePlateUnknown;
     }
 
-    if (colcar[index].out <= "0001-01-01T00:00:00Z") {
-      colcar[index].out = "..."
-    }
-
     var dateIn = colcar[index].in;
-    dateIn = dateIn.split('T');
+    var dateInFormated = new Date(dateIn)
+    var In = dateInFormated.getDate() + "/" + dateInFormated.getMonth() + "/" + dateInFormated.getFullYear() + "  " + dateInFormated.getHours() + ":" + dateInFormated.getMinutes() + ":" + dateInFormated.getSeconds();
 
-    var hour = dateIn[1]
+    var dateOut = colcar[index].out;
+    var dateOutFormated = new Date(dateOut)
+    var Out = dateOutFormated.getDate() + "/" + dateOutFormated.getMonth() + "/" + dateOutFormated.getFullYear() + "  " + dateOutFormated.getHours() + ":" + dateOutFormated.getMinutes() + ":" + dateOutFormated.getSeconds();
+
+    if (colcar[index].out <= "0001-01-01T00:00:00Z") {
+      Out = "..."
+    }
 
     rows.push(createData(
       colcar[index].id,
@@ -88,8 +90,8 @@ export default function BasicTable() {
       colcar[index].car.name,
       colcar[index].car.color,
       colcar[index].car.licensePlate,
-      dateIn[0] + ", " + hour,
-      colcar[index].out,
+      In,
+      Out,
       colcar[index].status
     )
     )
