@@ -10,21 +10,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 
 import "./Style.scss";
+import FilterByName from '../FilterByName/FilterByName';
 
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
-
-  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
-  const [priceFilter, setPriceFilter] = useState<number | null>(null);
-
-  const collaboratorFilter = [''];
-
-  const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
-
 
   function createData(
     id: string,
@@ -40,7 +31,9 @@ export default function BasicTable() {
     return { id, edv, name, car, color, licensePlate, In, out, status };
   }
 
-  const rows = [];
+  const rows = [
+
+  ];
 
   const handleGetCollaboratorsAndCars = useCallback(async () => {
     try {
@@ -65,10 +58,6 @@ export default function BasicTable() {
   }, []);
 
   for (let index = 0; index < colcar.length; index++) {
-
-    if (colcar[index].collaborator.name) {
-      collaboratorFilter.push(colcar[index].collaborator.name)
-    }
 
     if (colcar[index].car == null) {
       colcar[index].car = {
@@ -95,42 +84,23 @@ export default function BasicTable() {
       Out = "..."
     }
 
-    let filterLower = nameFilter != null ? nameFilter.toLowerCase() : '';
-
-    let nameLower = colcar[index].collaborator.name.toLowerCase();
-
-    if (nameLower.includes(filterLower)) {
-      rows.push(createData(
-        colcar[index].id,
-        colcar[index].collaborator.edv,
-        colcar[index].collaborator.name,
-        colcar[index].car.name,
-        colcar[index].car.color,
-        colcar[index].car.licensePlate,
-        In,
-        Out,
-        colcar[index].status
-      )
-      )
-    }
+    rows.push(createData(
+      colcar[index].id,
+      colcar[index].collaborator.edv,
+      colcar[index].collaborator.name,
+      colcar[index].car.name,
+      colcar[index].car.color,
+      colcar[index].car.licensePlate,
+      In,
+      Out,
+      colcar[index].status
+    )
+    )
   }
 
-  console.log(nameFilter)
-
   return (
-    <div className="Big_Container">
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        value={nameFilter}
-        onChange={(event: any, newValue: string | null) => {
-          setNameFilter(newValue);
-        }}
-        options={collaboratorFilter}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Colaboradores" />}
-      />
-
+    <>
+      <FilterByName colcar={colcar}/>
       <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{
@@ -217,6 +187,6 @@ export default function BasicTable() {
           </TableBody>
         </Table>
       </TableContainer >
-    </div>
+    </>
   );
 }
