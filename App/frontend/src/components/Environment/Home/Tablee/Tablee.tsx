@@ -18,10 +18,13 @@ import "./Style.scss";
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
 
-  const [nameFilter, setNameFilter] = useState("");
-
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [priceFilter, setPriceFilter] = useState<number | null>(null);
+
+  const collaboratorFilter = [''];
+
+  const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
+
 
   function createData(
     id: string,
@@ -37,9 +40,7 @@ export default function BasicTable() {
     return { id, edv, name, car, color, licensePlate, In, out, status };
   }
 
-  const rows = [
-
-  ];
+  const rows = [];
 
   const handleGetCollaboratorsAndCars = useCallback(async () => {
     try {
@@ -64,6 +65,10 @@ export default function BasicTable() {
   }, []);
 
   for (let index = 0; index < colcar.length; index++) {
+
+    if (colcar[index].collaborator.name) {
+      collaboratorFilter.push(colcar[index].collaborator.name)
+    }
 
     if (colcar[index].car == null) {
       colcar[index].car = {
@@ -90,7 +95,8 @@ export default function BasicTable() {
       Out = "..."
     }
 
-    let filterLower = nameFilter.toLowerCase();
+    let filterLower = nameFilter != null ? nameFilter.toLowerCase() : '';
+
     let nameLower = colcar[index].collaborator.name.toLowerCase();
 
     if (nameLower.includes(filterLower)) {
@@ -109,18 +115,18 @@ export default function BasicTable() {
     }
   }
 
+  console.log(nameFilter)
+
   return (
     <div className="Big_Container">
-      <label>
-        <input
-          onChange={(e) => setNameFilter(e.target.value)}
-        />
-      </label>
-
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={[{ label: "colcar", year: 1994 }]}
+        value={nameFilter}
+        onChange={(event: any, newValue: string | null) => {
+          setNameFilter(newValue);
+        }}
+        options={collaboratorFilter}
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Colaboradores" />}
       />
