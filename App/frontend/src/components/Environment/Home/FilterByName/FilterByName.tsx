@@ -3,36 +3,38 @@ import { useCallback, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function FilterByName(colcar) {
+export default function FilterByName(data) {
     const collaboratorFilter = [''];
 
-    console.log(colcar)
+    // console.log(data)
     const rows = [];
 
     const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
 
-    for (let index = 0; index < colcar.length; index++) {
+    for (let index = 0; index < data.length; index++) {
 
-        if (colcar[index].collaborator.name) {
-            collaboratorFilter.push(colcar[index].collaborator.name)
+        console.log(data[index].collaborator.name)
+
+        if (data[index].collaborator.name) {
+            collaboratorFilter.push(data[index].collaborator.name)
             console.log(collaboratorFilter)
         }
 
         let filterLower = nameFilter != null ? nameFilter.toLowerCase() : '';
 
-        let nameLower = colcar[index].collaborator.name.toLowerCase();
+        let nameLower = data[index].collaborator.name.toLowerCase();
 
         if (nameLower.includes(filterLower)) {
-            colcar.push(
-                colcar[index].id,
-                colcar[index].collaborator.edv,
-                colcar[index].collaborator.name,
-                colcar[index].car.name,
-                colcar[index].car.color,
-                colcar[index].car.licensePlate,
+            data.push(
+                data[index].id,
+                data[index].collaborator.edv,
+                data[index].collaborator.name,
+                data[index].car.name,
+                data[index].car.color,
+                data[index].car.licensePlate,
                 In,
                 Out,
-                colcar[index].status
+                data[index].status
             )
         }
     }

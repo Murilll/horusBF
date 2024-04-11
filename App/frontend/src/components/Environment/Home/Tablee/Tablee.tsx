@@ -100,7 +100,7 @@ export default function BasicTable() {
 
   return (
     <>
-      <FilterByName colcar={colcar}/>
+      <FilterByName data={colcar}/>
       <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{
