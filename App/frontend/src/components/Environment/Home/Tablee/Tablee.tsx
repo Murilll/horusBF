@@ -10,11 +10,18 @@ import { useCallback, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import "./Style.scss";
 
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
+
+  const [nameFilter, setNameFilter] = useState("");
+
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+  const [priceFilter, setPriceFilter] = useState<number | null>(null);
 
   function createData(
     id: string,
@@ -83,106 +90,127 @@ export default function BasicTable() {
       Out = "..."
     }
 
-    rows.push(createData(
-      colcar[index].id,
-      colcar[index].collaborator.edv,
-      colcar[index].collaborator.name,
-      colcar[index].car.name,
-      colcar[index].car.color,
-      colcar[index].car.licensePlate,
-      In,
-      Out,
-      colcar[index].status
-    )
-    )
+    let filterLower = nameFilter.toLowerCase();
+    let nameLower = colcar[index].collaborator.name.toLowerCase();
+
+    if (nameLower.includes(filterLower)) {
+      rows.push(createData(
+        colcar[index].id,
+        colcar[index].collaborator.edv,
+        colcar[index].collaborator.name,
+        colcar[index].car.name,
+        colcar[index].car.color,
+        colcar[index].car.licensePlate,
+        In,
+        Out,
+        colcar[index].status
+      )
+      )
+    }
   }
 
   return (
-    <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead sx={{
-          backgroundColor: "white",
+    <div className="Big_Container">
+      <label>
+        <input
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
+      </label>
 
-          fontSize: 96
-        }}>
-          <TableRow>
-            <TableCell>
-              <Typography variant="h6">EDV</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">Name</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">Car</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">Color</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">License Plate</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">In</Typography>
-            </TableCell>
-            <TableCell align="left">
-              <Typography variant="h6">Out</Typography>
-            </TableCell>
-            <TableCell align="center">
-              <Typography variant="h6">Status</Typography>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.edv}
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={[{ label: "colcar", year: 1994 }]}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Colaboradores" />}
+      />
+
+      <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead sx={{
+            backgroundColor: "white",
+
+            fontSize: 96
+          }}>
+            <TableRow>
+              <TableCell>
+                <Typography variant="h6">EDV</Typography>
               </TableCell>
-              <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{row.car}</TableCell>
-              <TableCell align="left">{row.color}</TableCell>
-              <TableCell align="left">{row.licensePlate}</TableCell>
-              <TableCell align="left">{row.In}</TableCell>
-              <TableCell align="left">{row.out}</TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">Name</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">Car</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">Color</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">License Plate</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">In</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography variant="h6">Out</Typography>
+              </TableCell>
               <TableCell align="center">
-                {row.status == "Saiu" ? (
-                  <div className="Ctn_Status">
-                    <div className="Ctn_Status_Exit">
-                      {row.status}
-                    </div>
-                    <div className="Ctn_Status_Exit_Circle">
-                      .
-                    </div>
-                  </div>
-                ) : (
-                  row.status == "Entrou" ? (
+                <Typography variant="h6">Status</Typography>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.edv}
+                </TableCell>
+                <TableCell align="left">{row.name}</TableCell>
+                <TableCell align="left">{row.car}</TableCell>
+                <TableCell align="left">{row.color}</TableCell>
+                <TableCell align="left">{row.licensePlate}</TableCell>
+                <TableCell align="left">{row.In}</TableCell>
+                <TableCell align="left">{row.out}</TableCell>
+                <TableCell align="center">
+                  {row.status == "Saiu" ? (
                     <div className="Ctn_Status">
-                      <div className="Ctn_Status_In">
+                      <div className="Ctn_Status_Exit">
                         {row.status}
                       </div>
-                      <div className="Ctn_Status_In_Circle">
+                      <div className="Ctn_Status_Exit_Circle">
                         .
                       </div>
                     </div>
                   ) : (
-                    <div className="Ctn_Status">
-                      <div className="Ctn_Status_Unknow">
-                        {row.status}
+                    row.status == "Entrou" ? (
+                      <div className="Ctn_Status">
+                        <div className="Ctn_Status_In">
+                          {row.status}
+                        </div>
+                        <div className="Ctn_Status_In_Circle">
+                          .
+                        </div>
                       </div>
-                      <div className="Ctn_Status_Unknow_Circle">
-                        .
+                    ) : (
+                      <div className="Ctn_Status">
+                        <div className="Ctn_Status_Unknow">
+                          {row.status}
+                        </div>
+                        <div className="Ctn_Status_Unknow_Circle">
+                          .
+                        </div>
                       </div>
-                    </div>
-                  )
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer >
+                    )
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer >
+    </div>
   );
 }

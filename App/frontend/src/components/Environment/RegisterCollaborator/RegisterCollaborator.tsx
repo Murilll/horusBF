@@ -2,16 +2,23 @@ import { TextField, Box } from '@mui/material/';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import './Style.scss';
 
 export default function RegisterCollaborator() {
+    const router = useRouter()
+
     const [name, setName] = useState("")
     const [edv, setEDV] = useState("")
     const [car, setCar] = useState("")
     const [color, setColor] = useState("")
     const [plate, setPlate] = useState("")
     const [collaboratorId, setCollaboratorId] = useState("")
+
+    const handleClick = () => {
+        router.push('/registerCollaborator');
+      };
 
     const send = async () => {
         const Collaborator = {
@@ -20,9 +27,7 @@ export default function RegisterCollaborator() {
         };
         const res = await axios.post("http://localhost:5293/api/Collaborators", Collaborator);
 
-
         await setCollaboratorId(res.data.id)
-        console.log(collaboratorId)
 
         const Car = {
             Name: car,
@@ -31,6 +36,8 @@ export default function RegisterCollaborator() {
             CollaboratorId: collaboratorId
         };
         const res2 = await axios.post("http://localhost:5293/api/Cars", Car);
+
+        handleClick()
     }
 
     return (
