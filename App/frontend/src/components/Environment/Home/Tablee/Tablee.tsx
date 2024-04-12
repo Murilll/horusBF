@@ -115,21 +115,24 @@ export default function BasicTable() {
     }
   }
 
-  console.log(nameFilter)
+  var nomesSet = new Set(collaboratorFilter);
+  const uniqueItemsArray = Array.from(nomesSet);
 
   return (
     <div className="Big_Container">
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        value={nameFilter}
-        onChange={(event: any, newValue: string | null) => {
-          setNameFilter(newValue);
-        }}
-        options={collaboratorFilter}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Colaboradores" />}
-      />
+      <div className="Filter_By_Name">
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          value={nameFilter}
+          onChange={(event: any, newValue: string | null) => {
+            setNameFilter(newValue);
+          }}
+          options={uniqueItemsArray}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Colaboradores" />}
+        />
+      </div>
 
       <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
