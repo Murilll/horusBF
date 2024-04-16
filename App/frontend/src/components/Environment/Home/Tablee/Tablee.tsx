@@ -21,7 +21,7 @@ export default function BasicTable() {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [priceFilter, setPriceFilter] = useState<number | null>(null);
 
-  const collaboratorFilter = [''];
+  const collaboratorFilter = [""];
 
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
 
