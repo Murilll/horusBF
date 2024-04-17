@@ -12,6 +12,7 @@ import axios from 'axios';
 import Brand from '@/components/Common/Brand/Brand';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Dashboards from '../Dashboards/Dashboards';
 
 import "./Style.scss";
 
@@ -133,6 +134,8 @@ export default function BasicTable() {
           renderInput={(params) => <TextField {...params} label="Colaboradores" />}
         />
       </div>
+
+      <Dashboards />
 
       <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
