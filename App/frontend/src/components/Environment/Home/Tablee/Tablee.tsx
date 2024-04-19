@@ -86,11 +86,11 @@ export default function BasicTable() {
 
     var dateIn = colcar[index].in;
     var dateInFormated = new Date(dateIn)
-    var In = dateInFormated.getDate() + "/" + dateInFormated.getMonth() + "/" + dateInFormated.getFullYear() + "  " + dateInFormated.getHours() + ":" + dateInFormated.getMinutes() + ":" + dateInFormated.getSeconds();
+    var In = dateInFormated.getDate() + "/" + dateInFormated.getMonth() + "/" + dateInFormated.getFullYear() + "," + "  " + dateInFormated.getHours() + ":" + dateInFormated.getMinutes() + ":" + dateInFormated.getSeconds();
 
     var dateOut = colcar[index].out;
     var dateOutFormated = new Date(dateOut)
-    var Out = dateOutFormated.getDate() + "/" + dateOutFormated.getMonth() + "/" + dateOutFormated.getFullYear() + "  " + dateOutFormated.getHours() + ":" + dateOutFormated.getMinutes() + ":" + dateOutFormated.getSeconds();
+    var Out = dateOutFormated.getDate() + "/" + dateOutFormated.getMonth() + "/" + dateOutFormated.getFullYear() + "," + "  " + dateOutFormated.getHours() + ":" + dateOutFormated.getMinutes() + ":" + dateOutFormated.getSeconds();
 
     if (colcar[index].out <= "0001-01-01T00:00:00Z") {
       Out = "..."
@@ -149,25 +149,25 @@ export default function BasicTable() {
                 <Typography variant="h6">EDV</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">Name</Typography>
+                <Typography variant="h6">NOME</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">Car</Typography>
+                <Typography variant="h6">CARRO</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">Color</Typography>
+                <Typography variant="h6">COR</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">License Plate</Typography>
+                <Typography variant="h6">LICENSE PLATE</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">In</Typography>
+                <Typography variant="h6">IN</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">Out</Typography>
+                <Typography variant="h6">OUT</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="h6">Status</Typography>
+                <Typography variant="h6">STATUS</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
