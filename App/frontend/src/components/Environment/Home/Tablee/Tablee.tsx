@@ -19,10 +19,7 @@ import "./Style.scss";
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
 
-  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
-  const [priceFilter, setPriceFilter] = useState<number | null>(null);
-
-  const collaboratorFilter = [""];
+  const collaboratorFilter = ["..."];
 
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
 
