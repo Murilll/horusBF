@@ -19,10 +19,11 @@ import "./Style.scss";
 export default function BasicTable() {
   const [colcar, setColCar] = useState<any[]>([]);
 
-  const collaboratorFilter = ["..."];
+  const collaboratorFilter = [""];
+  const statusListFilter = [""];
 
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
-
+  const [statusFilter, setStatusFilter] = useState<string | null>(statusListFilter[0]);
 
   function createData(
     id: string,
@@ -94,10 +95,12 @@ export default function BasicTable() {
     }
 
     let filterLower = nameFilter != null ? nameFilter.toLowerCase() : '';
+    let filterStatus = statusFilter != null ? statusFilter : "";
 
     let nameLower = colcar[index].collaborator.name.toLowerCase();
+    let statusLower = colcar[index].status;
 
-    if (nameLower.includes(filterLower)) {
+    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus)) {
       rows.push(createData(
         colcar[index].id,
         colcar[index].collaborator.edv,
@@ -129,6 +132,20 @@ export default function BasicTable() {
           options={uniqueItemsArray}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Colaboradores" />}
+        />
+      </div>
+
+      <div className="Filter_By_Name">
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          value={statusFilter}
+          onChange={(event: any, newValue: string | null) => {
+            setStatusFilter(newValue);
+          }}
+          options={["Entrou", "Saiu", "Carro não cadastrado"]}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Status" />}
         />
       </div>
 
