@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import { useCallback, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import axios from 'axios';
-import Brand from '@/components/Common/Brand/Brand';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Dashboards from '../Dashboards/Dashboards';
@@ -21,9 +20,11 @@ export default function BasicTable() {
 
   const collaboratorFilter = [""];
   const statusListFilter = [""];
+  const licensePlateListFilter = [""];
 
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
   const [statusFilter, setStatusFilter] = useState<string | null>(statusListFilter[0]);
+  const [licensePlateFilter, setLicensePlateFilter] = useState<string | null>(licensePlateListFilter[0]);
 
   function createData(
     id: string,
@@ -67,6 +68,7 @@ export default function BasicTable() {
 
     if (colcar[index].collaborator.name) {
       collaboratorFilter.push(colcar[index].collaborator.name)
+      licensePlateListFilter.push(colcar[index].car.licensePlate)
     }
 
     if (colcar[index].car == null) {
@@ -96,11 +98,13 @@ export default function BasicTable() {
 
     let filterLower = nameFilter != null ? nameFilter.toLowerCase() : '';
     let filterStatus = statusFilter != null ? statusFilter : "";
+    let filterLicensePlate = licensePlateFilter != null ? licensePlateFilter.toLowerCase() : "";
 
     let nameLower = colcar[index].collaborator.name.toLowerCase();
     let statusLower = colcar[index].status;
+    let licensePlateLower = colcar[index].car.licensePlate.toLowerCase();
 
-    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus)) {
+    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate)) {
       rows.push(createData(
         colcar[index].id,
         colcar[index].collaborator.edv,
@@ -119,34 +123,53 @@ export default function BasicTable() {
   var nomesSet = new Set(collaboratorFilter);
   const uniqueItemsArray = Array.from(nomesSet);
 
+  var licensePlateSet = new Set(licensePlateListFilter);
+  const uniqueLicensePlateItemsArray = Array.from(licensePlateSet);
+
   return (
     <div className="Big_Container">
-      <div className="Filter_By_Name">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          value={nameFilter}
-          onChange={(event: any, newValue: string | null) => {
-            setNameFilter(newValue);
-          }}
-          options={uniqueItemsArray}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Colaboradores" />}
-        />
-      </div>
+      <div className="Filter_Container">
+        <div className="Filter_Component">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={nameFilter}
+            onChange={(event: any, newValue: string | null) => {
+              setNameFilter(newValue);
+            }}
+            options={uniqueItemsArray}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Colaboradores" />}
+          />
+        </div>
 
-      <div className="Filter_By_Name">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          value={statusFilter}
-          onChange={(event: any, newValue: string | null) => {
-            setStatusFilter(newValue);
-          }}
-          options={["Entrou", "Saiu", "Carro não cadastrado"]}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Status" />}
-        />
+        <div className="Filter_Component">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={statusFilter}
+            onChange={(event: any, newValue: string | null) => {
+              setStatusFilter(newValue);
+            }}
+            options={["Entrou", "Saiu", "Carro não cadastrado"]}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Status" />}
+          />
+        </div>
+
+        <div className="Filter_Component">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={licensePlateFilter}
+            onChange={(event: any, newValue: string | null) => {
+              setLicensePlateFilter(newValue);
+            }}
+            options={uniqueLicensePlateItemsArray}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="License Plate" />}
+          />
+        </div>
       </div>
 
       <Dashboards />
