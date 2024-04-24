@@ -177,34 +177,34 @@ export default function BasicTable() {
       <TableContainer sx={{ maxHeight: '100%' }} component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{
-            backgroundColor: "white",
+            backgroundColor: "#f8fafc",
 
             fontSize: 96
           }}>
             <TableRow>
               <TableCell>
-                <Typography variant="h6">EDV</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>EDV</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">NOME</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>NOME</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">CARRO</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>CARRO</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">COR</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>COR</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">LICENSE PLATE</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>LICENSE PLATE</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">IN</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>IN</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6">OUT</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>OUT</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="h6">STATUS</Typography>
+                <Typography variant="h6" style={{color: '#7c90a2'}}>STATUS</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
