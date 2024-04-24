@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Brand from "../Brand/Brand";
 import Logo from "../Logo/Logo";
 import "./Style.scss";
+import AccessibleTabs from "../AccessibleTabs/AccessibleTabs";
 
 export default function Header() {
     const router = useRouter()
@@ -14,17 +15,8 @@ export default function Header() {
                 <Brand />
                 <div className="Container_Header">
                     <Logo />
-                
                     <div className="Container_Button">
-                        <Button type="button" onClick={() => router.push('/home')}>
-                            Home
-                        </Button>
-                        <Button type="button" onClick={() => router.push('/registerCollaborator')}>
-                            Registrar Colaborador
-                        </Button>
-                        <Button type="button" onClick={() => router.push('/dashboards')}>
-                            Dashboard
-                        </Button>
+                        <AccessibleTabs />
                     </div>
                 </div>
             </div>
