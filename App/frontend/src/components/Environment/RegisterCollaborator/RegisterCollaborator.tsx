@@ -46,6 +46,12 @@ export default function RegisterCollaborator() {
 
         const timer = setTimeout(() => {
             setActive(false);
+            setName("")
+            setEDV("")
+            setCar("")
+            setColor("")
+            setPlate("")
+            setCollaboratorId("")
         }, 2000);
     }
 
