@@ -12,6 +12,10 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Dashboards from '../Dashboards/Dashboards';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers-pro';
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+import { DateTimeRangePicker } from '@mui/x-date-pickers-pro/DateTimeRangePicker';
 
 import "./Style.scss";
 
@@ -170,6 +174,34 @@ export default function BasicTable() {
             renderInput={(params) => <TextField {...params} label="License Plate" />}
           />
         </div>
+
+        <div className="Filter_Component">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={licensePlateFilter}
+            onChange={(event: any, newValue: string | null) => {
+              setLicensePlateFilter(newValue);
+            }}
+            options={uniqueLicensePlateItemsArray}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="License Plate" />}
+          />
+        </div>
+
+        <div className="Filter_Component">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={licensePlateFilter}
+            onChange={(event: any, newValue: string | null) => {
+              setLicensePlateFilter(newValue);
+            }}
+            options={uniqueLicensePlateItemsArray}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="License Plate" />}
+          />
+        </div>
       </div>
 
       <Dashboards />
@@ -183,28 +215,28 @@ export default function BasicTable() {
           }}>
             <TableRow>
               <TableCell>
-                <Typography variant="h6" style={{color: '#7c90a2'}}>EDV</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>EDV</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>NOME</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>NOME</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>CARRO</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>CARRO</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>COR</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>COR</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>LICENSE PLATE</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>LICENSE PLATE</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>IN</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>IN</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>OUT</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>OUT</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>STATUS</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>STATUS</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
