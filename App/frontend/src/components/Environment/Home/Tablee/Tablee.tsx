@@ -12,7 +12,8 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Dashboards from '../Dashboards/Dashboards';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
 
 import "./Style.scss";
 
@@ -26,6 +27,10 @@ export default function BasicTable() {
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
   const [statusFilter, setStatusFilter] = useState<string | null>(statusListFilter[0]);
   const [licensePlateFilter, setLicensePlateFilter] = useState<string | null>(licensePlateListFilter[0]);
+  const [DateInFilter, setDateInFilter] = React.useState<Dayjs | null>(dayjs('2022-04-17T15:30'));
+  const [DateOutFilter, setDateOutFilter] = React.useState<Dayjs | null>(dayjs('2022-04-17T15:30'));
+
+  console.log(DateInFilter)
 
   function createData(
     id: string,
@@ -104,6 +109,8 @@ export default function BasicTable() {
     let nameLower = colcar[index].collaborator.name.toLowerCase();
     let statusLower = colcar[index].status;
     let licensePlateLower = colcar[index].car.licensePlate.toLowerCase();
+    
+    let InForFilter = colcar[index].In;
 
     if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate)) {
       rows.push(createData(
@@ -172,7 +179,19 @@ export default function BasicTable() {
           />
         </div>
 
-        <DatePicker />
+        <div className="Filter_Component">
+          <DateTimePicker label="Data de entrada"
+            value={DateInFilter}
+            onChange={(newValue) => setDateInFilter(newValue)}
+          />
+        </div>
+
+        <div className="Filter_Component">
+          <DateTimePicker label="Data de saida"
+            value={DateOutFilter}
+            onChange={(newValue) => setDateOutFilter(newValue)}
+          />
+        </div>
       </div>
 
       <Dashboards />
@@ -186,28 +205,28 @@ export default function BasicTable() {
           }}>
             <TableRow>
               <TableCell>
-                <Typography variant="h6" style={{color: '#7c90a2'}}>EDV</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>EDV</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>NOME</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>NOME</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>CARRO</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>CARRO</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>COR</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>COR</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>LICENSE PLATE</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>LICENSE PLATE</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>IN</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>IN</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>OUT</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>OUT</Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="h6" style={{color: '#7c90a2'}}>STATUS</Typography>
+                <Typography variant="h6" style={{ color: '#7c90a2' }}>STATUS</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
