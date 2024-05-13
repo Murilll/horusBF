@@ -12,6 +12,7 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Dashboards from '../Dashboards/Dashboards';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import "./Style.scss";
 
@@ -170,6 +171,8 @@ export default function BasicTable() {
             renderInput={(params) => <TextField {...params} label="License Plate" />}
           />
         </div>
+
+        <DatePicker />
       </div>
 
       <Dashboards />
