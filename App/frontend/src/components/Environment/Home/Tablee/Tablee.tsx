@@ -27,10 +27,15 @@ export default function BasicTable() {
   const [nameFilter, setNameFilter] = useState<string | null>(collaboratorFilter[0]);
   const [statusFilter, setStatusFilter] = useState<string | null>(statusListFilter[0]);
   const [licensePlateFilter, setLicensePlateFilter] = useState<string | null>(licensePlateListFilter[0]);
-  const [DateInFilter, setDateInFilter] = React.useState<Dayjs | null>(dayjs('2022-04-17T15:30'));
+  const [DateInFilter, setDateInFilter] = React.useState<Dayjs | null>(dayjs('2024-05-14T15:30'));
   const [DateOutFilter, setDateOutFilter] = React.useState<Dayjs | null>(dayjs('2022-04-17T15:30'));
 
-  console.log(DateInFilter)
+  var time = DateInFilter?.toDate()
+  var day = time?.getDate()
+  var month = time?.getMonth()
+  var year = time?.getFullYear()
+
+  console.log(day)
 
   function createData(
     id: string,
@@ -110,9 +115,14 @@ export default function BasicTable() {
     let statusLower = colcar[index].status;
     let licensePlateLower = colcar[index].car.licensePlate.toLowerCase();
     
-    let InForFilter = colcar[index].In;
+    let DayInForFilter = dateInFormated.getDay();
 
-    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate)) {
+    console.log(DayInForFilter + "AAAA")
+
+    let MonthInForFilter = dateInFormated.getMonth();
+    let YearInForFilter = dateInFormated.getFullYear()
+
+    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate) && day >= DayInForFilter ) {
       rows.push(createData(
         colcar[index].id,
         colcar[index].collaborator.edv,
@@ -186,12 +196,12 @@ export default function BasicTable() {
           />
         </div>
 
-        <div className="Filter_Component">
+        {/* <div className="Filter_Component">
           <DateTimePicker label="Data de saida"
             value={DateOutFilter}
             onChange={(newValue) => setDateOutFilter(newValue)}
           />
-        </div>
+        </div> */}
       </div>
 
       <Dashboards />
