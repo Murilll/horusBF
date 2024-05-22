@@ -156,7 +156,7 @@ export default function BasicTable() {
               setNameFilter(newValue);
             }}
             options={uniqueItemsArray}
-            sx={{ width: 300 }}
+            sx={{ width: 234 }}
             renderInput={(params) => <TextField {...params} label="Colaboradores" />}
           />
         </div>
@@ -170,7 +170,7 @@ export default function BasicTable() {
               setStatusFilter(newValue);
             }}
             options={["Entrou", "Saiu", "Carro não cadastrado"]}
-            sx={{ width: 300 }}
+            sx={{ width: 234 }}
             renderInput={(params) => <TextField {...params} label="Status" />}
           />
         </div>
@@ -184,7 +184,7 @@ export default function BasicTable() {
               setLicensePlateFilter(newValue);
             }}
             options={uniqueLicensePlateItemsArray}
-            sx={{ width: 300 }}
+            sx={{ width: 234 }}
             renderInput={(params) => <TextField {...params} label="License Plate" />}
           />
         </div>
@@ -193,6 +193,7 @@ export default function BasicTable() {
           <DateTimePicker label="Data de entrada"
             value={DateInFilter}
             onChange={(newValue) => setDateInFilter(newValue)}
+            sx={{ width: 234 }}
           />
         </div>
 
@@ -200,6 +201,7 @@ export default function BasicTable() {
           <DateTimePicker label="Data de saida"
             value={DateOutFilter}
             onChange={(newValue) => setDateOutFilter(newValue)}
+            sx={{ width: 234 }}
           />
         </div>
       </div>
