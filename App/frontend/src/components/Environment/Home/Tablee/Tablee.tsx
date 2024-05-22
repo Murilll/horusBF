@@ -114,7 +114,7 @@ export default function BasicTable() {
     let nameLower = colcar[index].collaborator.name.toLowerCase();
     let statusLower = colcar[index].status;
     let licensePlateLower = colcar[index].car.licensePlate.toLowerCase();
-    
+
     let DayInForFilter = dateInFormated.getDay();
 
     console.log(DayInForFilter + "AAAA")
@@ -122,7 +122,7 @@ export default function BasicTable() {
     let MonthInForFilter = dateInFormated.getMonth();
     let YearInForFilter = dateInFormated.getFullYear()
 
-    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate) && day >= DayInForFilter ) {
+    if (nameLower.includes(filterLower) && statusLower.includes(filterStatus) && licensePlateLower.includes(filterLicensePlate) && day >= DayInForFilter) {
       rows.push(createData(
         colcar[index].id,
         colcar[index].collaborator.edv,
@@ -196,12 +196,12 @@ export default function BasicTable() {
           />
         </div>
 
-        {/* <div className="Filter_Component">
+        <div className="Filter_Component">
           <DateTimePicker label="Data de saida"
             value={DateOutFilter}
             onChange={(newValue) => setDateOutFilter(newValue)}
           />
-        </div> */}
+        </div>
       </div>
 
       <Dashboards />
