@@ -21,6 +21,7 @@ export default function Home() {
 
     return (
         <>
+        <h1>Register Type Of Place</h1>
             <div className="Container_Home">
                 <div className="Container_Table">
                     <Table />
